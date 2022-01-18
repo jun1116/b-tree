@@ -104,7 +104,7 @@ class BTree:
         while pos < len(node.keys):
             if key[0] == node.keys[pos][0]:
                 # print(f'Find! key : {node.keys[pos]}')
-                return node, key
+                return node, node.keys[pos]
             elif key[0] < node.keys[pos][0] : break
             else:
                 pos+=1
