@@ -1,4 +1,4 @@
 *.csv
 venv
 data
-
+__pycache__
