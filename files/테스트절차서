@@ -1,0 +1,24 @@
+# 테스트 절차서  
+## 1. 프로그램 실행 및 Order M 설정  
+```python
+python3 main.py
+Enter the M order of B-Tree (default is 5) {Input Order M} 
+```
+Order에 대하여 입력합니다.  
+
+## 2. Insertion
+```python
+Press number you want to start and [ENTER]
+1. insertion    2.deletion      3.quit 
+1
+Write the Input file name With out extension 
+(ex. input, input22 )
+```
+1. `1` 을 입력하여 insertion을 실행하고, `data` 라는 폴더에 저장된 Input 파일명의 확장자를 제외한 부분을 입력합니다.  
+2. 1의 과정에서 입력한 파일이 실행됩니다.   
+3. 2의 과정이후 Key-Value의 Insert 중 저장한 key에 대하여, Search 가 순차적으로 수행됩니다.   
+4. Search의 결과를 `{input_file_name}_compare.csv` 의 이름으로 `data` 폴더 내에 저장합니다.     
+5. 1에서 입력된 파일과 4에서 저장된 {input_file_name}_compare.csv 을 비교하여 결과를 출력합니다.  
+
+## 3. Deletion 
+TODO
