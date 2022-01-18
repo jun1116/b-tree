@@ -149,7 +149,7 @@ class BTree:
 
 if __name__=="__main__":
     print("Start")
-    bt = BTree(3)
-    for i in range(1,50):
-        bt.insert_node(bt.root,[i,i*10])
+    # bt = BTree(3)
+    # for i in range(1,50):
+    #     bt.insert_node(bt.root,[i,i*10])
     
