@@ -1,4 +1,4 @@
-from BTree_HJ import BTree#, Node
+from BTree_HJ import BTree #, Node
 import csv
 import os
 
@@ -61,8 +61,4 @@ if __name__=="__main__":
         elif num=='3': # Quit
             print("STOP THE LOOP")
             break
-    # bt = BTree(3)
-    # bt.insert_node(bt.root,[1,2])
-    # bt.insert_node(bt.root,[2,3])
-    # bt.print_inorder(bt.root)
 
