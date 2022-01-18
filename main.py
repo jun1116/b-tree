@@ -17,7 +17,7 @@ def compare(file1,file2):
 
 if __name__=="__main__":
     m = int(input("Enter the M order of B-Tree (default is 5) "))
-    bt=BTree(m if m>3 else 3)
+    bt=BTree(5 if m<3 or m=='' else m)
     while True:
         print("Press number you want to start and [ENTER]")
         num = input("1. insertion \t2.deletion \t3.quit \n")
