@@ -24,7 +24,7 @@ if __name__=="__main__":
         if num=='1': # Insertion
             ## Insert
             fnames=', '.join([i.split('.')[0] for i in search('./data') if i[:5]=='input'])
-            inputname=input(f"Write the Input file name With out extension (ex. {fnames} )\n")
+            inputname=input(f"Write the Input file name With out extension \n(ex. {fnames} )\n")
             fname="./data/" + inputname + '.csv'
             keylist=[]
             try:
@@ -49,12 +49,9 @@ if __name__=="__main__":
                         wr.writerow([k,'NF'])
 
             ## Compare
-            t,f=compare(fname, f'{inputname}_compare.csv')
-            print(f'Data Count = {t+f} , Correct : {t} , Incorrect : {f} , True Percent : {t/(t+f)}')
-            # with open(fname,'r') as ori:
-            #     with open(f"./data/{inputname}_compare.csv",'r') as comp:
+            t,f=compare(fname, f'./data/{inputname}_compare.csv')
+            print(f'Data Count = {t+f} , Correct : {t} , Incorrect : {f} , True Percent : {100*t/(t+f)}%')
                     
-
         elif num=='2': # Deletion
             pass
         elif num=='3': # Quit
