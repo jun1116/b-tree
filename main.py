@@ -2,6 +2,18 @@ from BTree_HJ import BTree#, Node
 import csv
 import os
 def search(dir): return os.listdir(dir)
+def compare(file1,file2):
+    t,f=0,0
+    with open(file1,'r') as f1:
+        with open(file2,'r') as f2:
+            reader1=csv.reader(f1, delimiter='\t')
+            reader2=csv.reader(f2, delimiter='\t')
+            for l1,l2 in zip(reader1,reader2):
+                if l1==l2:
+                    t+=1
+                else:
+                    f+=1
+    return t,f
 
 if __name__=="__main__":
     m = int(input("Enter the M order of B-Tree (default is 5) "))
@@ -16,17 +28,18 @@ if __name__=="__main__":
             fname="./data/" + inputname + '.csv'
             keylist=[]
             try:
-                f = open(fname,'r')
-                temp=0
-                for line in csv.reader(f,delimiter='\t'):
-                    key,value = int(line[0]) , int(line[1])
-                    keylist.append(int(key))
-                    bt.insert_node(bt.root,[key,value])
+                # f = open(fname,'r')
+                with open(fname,'r') as f:
+                    temp=0
+                    for line in csv.reader(f,delimiter='\t'):
+                        key,value = int(line[0]) , int(line[1])
+                        keylist.append(int(key))
+                        bt.insert_node(bt.root,[key,value])
             except:
                 print(f'There is No File {inputname}\nCheck the file name')
             
             ## Search and Write
-            with open(f"./data/{inputname}_compare.csv",'a',newline='') as f:
+            with open(f"./data/{inputname}_compare.csv",'w') as f:
                 wr=csv.writer(f,delimiter='\t')
                 for k in keylist:
                     _ , kv = bt.search_key(bt.root,[k,None])
@@ -36,10 +49,12 @@ if __name__=="__main__":
                         wr.writerow([k,'NF'])
 
             ## Compare
+            t,f=compare(fname, f'{inputname}_compare.csv')
+            print(f'Data Count = {t+f} , Correct : {t} , Incorrect : {f} , True Percent : {t/(t+f)}')
             # with open(fname,'r') as ori:
             #     with open(f"./data/{inputname}_compare.csv",'r') as comp:
-            #         ori.readlines
-            
+                    
+
         elif num=='2': # Deletion
             pass
         elif num=='3': # Quit
