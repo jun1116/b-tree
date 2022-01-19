@@ -25,17 +25,26 @@ pip install -r requirements.txt
 적절한 M이 중요하며 약 100만건의 데이터에서 M의 차이에 따라 연산의 속도가 다릅니다.  
 |M|Row Count|Insertion Time|
 |---|---|---|
-|10000|1,000,000|26min|
-|1000|1,000,000|5.5min|
-|500|1,000,000|3min|
+|10000|1,000,000|26 min|
+|1000|1,000,000|5.5 min|
+|500|1,000,000|3 min|
 
 약 100만건의 Input Data에 대하여 M=10000 일때 insertion에 26분이 소요되며  
 M=500일 경우 약 3분만에 Insertion 을 완료하였습니다.  
 Node 내부의 Key의 대소비교에 대하여 순차적으로 진행하는 특성상 M이 클수록 순차비교에 소모되는 시간이 크기 때문이라 볼 수 있습니다.  
+
+### csv 라이브러리 사용
 ```python
 python3 main.py
 Enter the M order of B-Tree (default is 5) {Input Order M}
 ```
+
+### pandas,tqdm 라이브러리 사용
+```python
+python3 main_pandas.py
+Enter the M order of B-Tree (default is 5) {Input Order M}
+```
+
 
 ### 1. Insertion -> Search -> Compare
 ```python
