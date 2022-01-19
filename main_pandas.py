@@ -28,14 +28,14 @@ if __name__=="__main__":
             compare_name = f"./data/{inputname}_compare.csv"
             print("\nInsertion Start\n")
             inputdf=pd.read_csv(fname,sep='\t',names=['key','value'])
-            for idx,row in tqdm(inputdf.iterrows()):
+            for idx,row in tqdm(inputdf.iterrows(), total=inputdf.shape[0]):
                 bt.insert_node(bt.root, [row['key'],row['value']])
 
             print("\nSearch Start\n")
             # Search and Write to CSV            
             arr=[]
-            for idx,row in tqdm(inputdf.iterrows()):
-                    bt.search_key(bt.root, [row['key'],None])
+            for idx,row in tqdm(inputdf.iterrows(), total=inputdf.shape[0]):
+                    _ , kv = bt.search_key(bt.root, [row['key'],None])
             sdf = pd.DataFrame(arr, columns=['key','value'])
             sdf.to_csv(compare_name, index=False, sep=",",encoding='utf-8',header=False, mode='w')
             
@@ -44,7 +44,7 @@ if __name__=="__main__":
             mdf=compare_df(fname, f'./data/{inputname}_compare.csv')
             t , f = len(mdf)-sum(mdf['incorrect']) , sum(mdf['incorrect'])
             print(f'Data Count = {t+f} , Correct : {t} , Incorrect : {f} , True Percent : {100*t/(t+f)}%')
-                    
+
         elif num=='2': # Deletion
             pass
         elif num=='3': # Quit
