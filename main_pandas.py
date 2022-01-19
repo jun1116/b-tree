@@ -36,6 +36,7 @@ if __name__=="__main__":
             arr=[]
             for idx,row in tqdm(inputdf.iterrows(), total=inputdf.shape[0]):
                     _ , kv = bt.search_key(bt.root, [row['key'],None])
+                    arr.append(kv)
             sdf = pd.DataFrame(arr, columns=['key','value'])
             sdf.to_csv(compare_name, index=False, sep=",",encoding='utf-8',header=False, mode='w')
             
