@@ -8,7 +8,7 @@ def compare(file1,file2):
     with open(file1,'r') as f1:
         with open(file2,'r') as f2:
             reader1=csv.reader(f1, delimiter='\t')
-            reader2=csv.reader(f2, delimiter='\t')
+            reader2=csv.reader(f2, delimiter=',')
             for l1,l2 in zip(reader1,reader2):
                 if l1==l2:
                     t+=1
@@ -32,7 +32,7 @@ if __name__=="__main__":
             keylist=[]
             try:
                 # f = open(fname,'r')
-                with open(fname,'r') as f:
+                with open(fname,'r',newline='') as f:
                     temp=0
                     for line in csv.reader(f,delimiter='\t'):
                         key,value = int(line[0]) , int(line[1])
@@ -43,8 +43,8 @@ if __name__=="__main__":
                 continue
             
             ## Search and Write
-            with open(f"./data/{inputname}_compare.csv",'w') as f:
-                wr=csv.writer(f,delimiter='\t')
+            with open(f"./data/{inputname}_compare.csv",'w', newline='') as f:
+                wr=csv.writer(f,delimiter=',')
                 for k in keylist:
                     _ , kv = bt.search_key(bt.root,[k,None])
                     if kv:
