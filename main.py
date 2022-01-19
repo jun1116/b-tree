@@ -32,7 +32,7 @@ if __name__=="__main__":
             keylist=[]
             try:
                 # f = open(fname,'r')
-                with open(fname,'r',newline='') as f:
+                with open(fname,'r',newline='',encoding='utf-8') as f:
                     temp=0
                     for line in csv.reader(f,delimiter='\t'):
                         key,value = int(line[0]) , int(line[1])
@@ -43,7 +43,7 @@ if __name__=="__main__":
                 continue
             
             ## Search and Write
-            with open(f"./data/{inputname}_compare.csv",'w', newline='') as f:
+            with open(f"./data/{inputname}_compare.csv",'w', newline='',encoding='utf-8') as f:
                 wr=csv.writer(f,delimiter=',')
                 for k in keylist:
                     _ , kv = bt.search_key(bt.root,[k,None])
