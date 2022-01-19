@@ -1,11 +1,22 @@
 # B-Tree order M With Python 
 
 ## Start
+### Python Version : 3.8.10
+
 git clone 을 통해 directory까지 다운받아 사용하면 편합니다. 
 ```
 git clone https://github.com/jun1116/b-tree.git
 cd b-tree
 ```
+
+### 환경세팅
+```
+pip install virtualenv
+virtualenv venv
+source venv/bin/activate
+pip install -r requirements.txt
+```
+
 
 시작은 main.py를 실행하면서 시작합니다. 
 실행 후 B-Tree의 Order를 입력하면 되며, 입력하지 않거나 3보다 작은 숫자 입력시 Default 는 5 입니다.
