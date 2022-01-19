@@ -19,7 +19,19 @@ pip install -r requirements.txt
 
 
 시작은 main.py를 실행하면서 시작합니다. 
-실행 후 B-Tree의 Order를 입력하면 되며, 입력하지 않거나 3보다 작은 숫자 입력시 Default 는 5 입니다.
+실행 후 B-Tree의 Order를 입력하면 되며, 입력하지 않거나 3보다 작은 숫자 입력시 Default 는 5 입니다.  
+
+대량의 데이터의 경우 M이 너무 크다고 속도가 빠른것이 아닙니다.   
+적절한 M이 중요하며 약 100만건의 데이터에서 M의 차이에 따라 연산의 속도가 다릅니다.  
+|M|Row Count|Insertion Time|
+|---|---|---|
+|10000|1,000,000|26min|
+|1000|1,000,000|5.5min|
+|500|1,000,000|3min|
+
+약 100만건의 Input Data에 대하여 M=10000 일때 insertion에 26분이 소요되며  
+M=500일 경우 약 3분만에 Insertion 을 완료하였습니다.  
+Node 내부의 Key의 대소비교에 대하여 순차적으로 진행하는 특성상 M이 클수록 순차비교에 소모되는 시간이 크기 때문이라 볼 수 있습니다.  
 ```python
 python3 main.py
 Enter the M order of B-Tree (default is 5) {Input Order M}
