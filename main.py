@@ -18,7 +18,7 @@ def compare(file1,file2):
 
 
 if __name__=="__main__":
-    m = int(input("Enter the M order of B-Tree (default is 5) "))
+    m = int(input("Enter the M order of B-Tree (default is 5) ") or 5)
     # bt=BTree(5 if m<3 or m=='' else m)
     print("Press number you want to start and [ENTER]")
     while True:
@@ -36,12 +36,11 @@ if __name__=="__main__":
                     temp=0
                     for line in csv.reader(f,delimiter='\t'):
                         key,value = int(line[0]) , int(line[1])
-                        keylist.append(int(key))
                         bt.insert_node(bt.root,[key,value])
+                        keylist.append(int(key))
             except:
                 print(f'There is No File {inputname}\nCheck the file name')
                 continue
-            
             ## Search and Write
             with open(f"./data/{inputname}_compare.csv",'w', newline='',encoding='utf-8') as f:
                 wr=csv.writer(f,delimiter=',')

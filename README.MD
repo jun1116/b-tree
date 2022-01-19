@@ -16,7 +16,8 @@ virtualenv venv
 source venv/bin/activate
 pip install -r requirements.txt
 ```
-
+___
+## 1. 시작 및 M 사이즈 설정
 
 시작은 main.py를 실행하면서 시작합니다. 
 실행 후 B-Tree의 Order를 입력하면 되며, 입력하지 않거나 3보다 작은 숫자 입력시 Default 는 5 입니다.  
@@ -44,9 +45,9 @@ Enter the M order of B-Tree (default is 5) {Input Order M}
 python3 main_pandas.py
 Enter the M order of B-Tree (default is 5) {Input Order M}
 ```
+___
 
-
-### 1. Insertion -> Search -> Compare
+## 2. Insertion -> Search -> Compare
 ```python
 Press number you want to start and [ENTER]
 1. insertion    2.deletion      3.quit 
