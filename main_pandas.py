@@ -17,10 +17,11 @@ if __name__=="__main__":
     tqdm.pandas()
     m = int(input("Enter the M order of B-Tree (default is 5) "))
     print("Press number you want to start and [ENTER]")
+    bt=BTree(5 if m<3 or m=='' else m)
     while True:
-        bt=BTree(5 if m<3 or m=='' else m)
         num = input("1. insertion \t2.deletion \t3.quit \n")
         if num=='1': # Insertion
+            bt=BTree(5 if m<3 or m=='' else m)
             ## Insert
             fnames=', '.join([i.split('.')[0] for i in search('./data') if i[:5]=='input'])
             inputname=input(f"Write the Input file name With out extension \n(ex. {fnames} )\n")
@@ -47,6 +48,35 @@ if __name__=="__main__":
             print(f'Data Count = {t+f} , Correct : {t} , Incorrect : {f} , True Percent : {100*t/(t+f)}%')
 
         elif num=='2': # Deletion
+            fnames=', '.join([i.split('.')[0] for i in search('./data') if i[:6]=='delete' and len(i)<=13])
+            inputname=input(f"Write the Delete Operation file name With out extension \n(ex. {fnames} )\n")
+            fname="./data/" + inputname + '.csv'
+            if inputname[-1].isdigit():
+                compare_name = f"./data/{inputname[:6]}_compare{inputname[-1]}.csv"
+                saved_name = f"./data/{inputname[:6]}_saved{inputname[-1]}.csv"
+            else:
+                compare_name = f"./data/{inputname[:6]}_compare.csv"
+                saved_name = f"./data/{inputname[:6]}_saved.csv"
+            print(fname,compare_name)
+            print("\nDeletion Start\n")
+            inputdf=pd.read_csv(fname,sep='\t',names=['key','value'])
+            for idx,row in tqdm(inputdf.iterrows(), total=inputdf.shape[0]):
+                bt.delete_pack(bt.root, [row['key'],row['value']])
+            
+            print("\nSearch Start\n")
+            arr=[]
+            for idx,row in tqdm(inputdf.iterrows(), total=inputdf.shape[0]):
+                    _ , kv = bt.search_key(bt.root, [row['key'],None])
+                    arr.append(kv)
+            sdf = pd.DataFrame(arr, columns=['key','value'])
+            sdf.to_csv(saved_name, index=False, sep=",",encoding='utf-8',header=False, mode='w')
+
+            ## Compare
+            print("\nCompare Start\n")
+            mdf=compare_df(saved_name, compare_name)
+            t , f = len(mdf)-sum(mdf['incorrect']) , sum(mdf['incorrect'])
+            print(f'Data Count = {t+f} , Correct : {t} , Incorrect : {f} , True Percent : {100*t/(t+f)}%')
+
             pass
         elif num=='3': # Quit
             print("STOP THE LOOP")
