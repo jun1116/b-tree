@@ -80,6 +80,7 @@ if __name__=="__main__":
             ## Compare
             print("\nCompare Start\n")
             mdf=compare_df(saved_name,',', compare_name,'\t')
+            sdf.fillna("NF").to_csv(saved_name, index=False, sep=",",encoding='utf-8',header=False, mode='w')
             t , f = len(mdf)-sum(mdf['incorrect']) , sum(mdf['incorrect'])
             print(f'Data Count = {t+f} , Correct : {t} , Incorrect : {f} , True Percent : {100*t/(t+f)}%')
 
