@@ -5,9 +5,9 @@ import pandas as pd
 from tqdm import tqdm
 
 def search(dir): return os.listdir(dir)
-def compare_df(origin,compare):
-    odf=pd.read_csv(origin, sep="\t", names=["key","value"])
-    cdf=pd.read_csv(compare, sep=",", names=["key","value"])
+def compare_df(origin,o_sep,compare,c_sep):
+    odf=pd.read_csv(origin, sep=o_sep, names=["key","value"])
+    cdf=pd.read_csv(compare, sep=c_sep, names=["key","value"])
     mdf=pd.merge(odf,cdf,how="outer",on='key', suffixes=["_origin","_compare"]).fillna("NF") # NF
     mdf["incorrect"]=mdf.apply(lambda x : 0 if x['value_origin']==x['value_compare'] else 1, axis="columns")
     return mdf
@@ -45,7 +45,7 @@ if __name__=="__main__":
             
             ## Compare
             print("\nCompare Start\n")
-            mdf=compare_df(fname, f'./data/{inputname}_compare.csv')
+            mdf=compare_df(fname,'\t', f'./data/{inputname}_compare.csv',',')
             t , f = len(mdf)-sum(mdf['incorrect']) , sum(mdf['incorrect'])
             print(f'Data Count = {t+f} , Correct : {t} , Incorrect : {f} , True Percent : {100*t/(t+f)}%')
 
@@ -79,7 +79,7 @@ if __name__=="__main__":
 
             ## Compare
             print("\nCompare Start\n")
-            mdf=compare_df(saved_name, compare_name)
+            mdf=compare_df(saved_name,',', compare_name,'\t')
             t , f = len(mdf)-sum(mdf['incorrect']) , sum(mdf['incorrect'])
             print(f'Data Count = {t+f} , Correct : {t} , Incorrect : {f} , True Percent : {100*t/(t+f)}%')
 
