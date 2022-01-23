@@ -8,7 +8,7 @@ def search(dir): return os.listdir(dir)
 def compare_df(origin,compare):
     odf=pd.read_csv(origin, sep="\t", names=["key","value"])
     cdf=pd.read_csv(compare, sep=",", names=["key","value"])
-    mdf=pd.merge(odf,cdf,how="outer",on='key', suffixes=["_origin","_compare"]).fillna("NF")
+    mdf=pd.merge(odf,cdf,how="outer",on='key', suffixes=["_origin","_compare"]).fillna("NF") # NF
     mdf["incorrect"]=mdf.apply(lambda x : 0 if x['value_origin']==x['value_compare'] else 1, axis="columns")
     return mdf
 
@@ -73,7 +73,7 @@ if __name__=="__main__":
                     if kv:
                         arr.append(kv)
                     else:
-                        arr.append([row['key'],"NF"])
+                        arr.append([row['key'],None])
             sdf = pd.DataFrame(arr, columns=['key','value'])
             sdf.to_csv(saved_name, index=False, sep=",",encoding='utf-8',header=False, mode='w')
 
