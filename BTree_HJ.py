@@ -5,7 +5,7 @@ class Node:
         self.keys=[]
         self.child=[]
     def __repr__(self):
-        return f'k:{self.keys}'
+        return f'Node :{self.keys}'
     def split(self):
         length = len(self.keys)
         temp = Node(self.isleaf)
@@ -22,7 +22,7 @@ class BTree:
         self.m=m #차수 -> m개의 child를 가질 수 있음
         self.root=Node(True)
         # self.root.isleaf = 'root'
-
+        # self.root=None
 
     # k : Key 
     # def insert_node(self,p_pos,p_node,node,key):
@@ -108,6 +108,7 @@ class BTree:
             elif key[0] < node.keys[pos][0] : break
             else:
                 pos+=1
+        # print(node, pos)
         if node.child:
             return self.search_key(node.child[pos],key)
         else : 
@@ -123,14 +124,16 @@ class BTree:
         else:
             for i in node.keys:
                 print(i)
-            # print(node.keys)
     
     def find_change_Pred(self,node,key):
 #특정키의 왼쪽자식받아 오른쪽을 찾아내려가서 가장큰수의 키를 바꾸고 바꾸기전 key return
         if node.isleaf: 
-            temp = node.keys[-1]
-            node.keys[-1] = key
-            return temp
+            try:
+                temp = node.keys[-1]
+                node.keys[-1] = key
+                return temp
+            except : 
+                print(node,key)
         return self.find_change_Pred(node.child[-1],key)
 
     def find_change_Succ(self,node,key):
@@ -234,7 +237,7 @@ class BTree:
                 return pnode
             else:
                 # print("중간녀석의 Merge")
-                pass
+                self.merge(pnode,pos-1,cpos-1,cpos)
 
 
     def distribute_with_right(self, pnode,pos):
@@ -273,7 +276,6 @@ class BTree:
         pnode.child.pop(rpos)
             # pass
         pass
-
 
 
 

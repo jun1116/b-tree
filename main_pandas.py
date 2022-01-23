@@ -18,6 +18,7 @@ if __name__=="__main__":
     m = int(input("Enter the M order of B-Tree (default is 5) "))
     print("Press number you want to start and [ENTER]")
     bt=BTree(5 if m<3 or m=='' else m)
+    inputfile=''
     while True:
         num = input("1. insertion \t2.deletion \t3.quit \n")
         if num=='1': # Insertion
@@ -26,6 +27,7 @@ if __name__=="__main__":
             fnames=', '.join([i.split('.')[0] for i in search('./data') if i[:5]=='input'])
             inputname=input(f"Write the Input file name With out extension \n(ex. {fnames} )\n")
             fname="./data/" + inputname + '.csv'
+            inputfile=fname
             compare_name = f"./data/{inputname}_compare.csv"
             print("\nInsertion Start\n")
             inputdf=pd.read_csv(fname,sep='\t',names=['key','value'])
@@ -64,10 +66,14 @@ if __name__=="__main__":
                 bt.delete_pack(bt.root, [row['key'],row['value']])
             
             print("\nSearch Start\n")
+            insertdf=pd.read_csv(inputfile,sep='\t',names=['key','value'])
             arr=[]
-            for idx,row in tqdm(inputdf.iterrows(), total=inputdf.shape[0]):
+            for idx,row in tqdm(insertdf.iterrows(), total=insertdf.shape[0]):
                     _ , kv = bt.search_key(bt.root, [row['key'],None])
-                    arr.append(kv)
+                    if kv:
+                        arr.append(kv)
+                    else:
+                        arr.append([row['key'],"NF"])
             sdf = pd.DataFrame(arr, columns=['key','value'])
             sdf.to_csv(saved_name, index=False, sep=",",encoding='utf-8',header=False, mode='w')
 
