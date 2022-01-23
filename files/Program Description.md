@@ -4,7 +4,7 @@
 버전 : 1.0.0  
 
 Python Version : 3.8.10  
-Used Library : os, csv (기본모듈)  
+Used Library : os, csv (기본모듈)  pandas, tqdm 등 (자세한 사항 requirements.txt 참조)
 
 # 사용법 및 작동방식
 테스트절차서.md 에 명세
