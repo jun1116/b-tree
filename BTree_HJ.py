@@ -128,12 +128,9 @@ class BTree:
     def find_change_Pred(self,node,key):
 #특정키의 왼쪽자식받아 오른쪽을 찾아내려가서 가장큰수의 키를 바꾸고 바꾸기전 key return
         if node.isleaf: 
-            try:
-                temp = node.keys[-1]
-                node.keys[-1] = key
-                return temp
-            except : 
-                print(node,key)
+            temp = node.keys[-1]
+            node.keys[-1] = key
+            return temp
         return self.find_change_Pred(node.child[-1],key)
 
     def find_change_Succ(self,node,key):
